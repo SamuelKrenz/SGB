@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Livro
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def livros(request):
     #return HttpResponse('Olá mundo')
@@ -13,7 +13,8 @@ def salva_livros(request):
     editora_livro = request.POST['editora_livro']
     return render(request, 'livros.html', context = {'titulo_livro': titulo_livro})
     #return HttpResponse('Livro salvo!' + titulo_livro)
-
+    
+@login_required
 def cadastra_livro(request):
     if request.method == 'POST':
         livro_id = request.POST['livro_id']
